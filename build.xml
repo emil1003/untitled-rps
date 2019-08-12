@@ -227,4 +227,6 @@
   <target name="build.modules" depends="init, clean, compile.module.untitled" description="build all modules"/>
   
   <target name="all" depends="build.modules" description="build all"/>
+
+  <target name="test" depends="init, clean, compile.module.untitled.tests" description="build test" />
 </project>

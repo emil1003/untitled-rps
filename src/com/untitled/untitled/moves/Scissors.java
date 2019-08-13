@@ -5,6 +5,8 @@ import com.untitled.untitled.Move;
 
 public class Scissors extends Move {
 
-    EnumMoveTypes _type = EnumMoveTypes.TYPE_SCISSORS;
+    public Scissors() {
+        setType(EnumMoveTypes.TYPE_SCISSORS);
+    }
 
 }

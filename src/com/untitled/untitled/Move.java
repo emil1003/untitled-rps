@@ -2,7 +2,11 @@ package com.untitled.untitled;
 
 public abstract class Move {
 
-    public EnumMoveTypes _type;
+    private EnumMoveTypes _type;
+
+    public void setType(EnumMoveTypes type) {
+        _type = type;
+    }
 
     public Boolean beatsMove(EnumMoveTypes type) {
         switch (_type) {

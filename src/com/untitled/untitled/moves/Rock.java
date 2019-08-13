@@ -5,6 +5,8 @@ import com.untitled.untitled.Move;
 
 public class Rock extends Move {
 
-    EnumMoveTypes _type = EnumMoveTypes.TYPE_ROCK;
+    public Rock() {
+        setType(EnumMoveTypes.TYPE_ROCK);
+    }
 
 }

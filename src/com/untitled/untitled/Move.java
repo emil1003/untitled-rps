@@ -2,7 +2,7 @@ package com.untitled.untitled;
 
 public abstract class Move {
 
-    private EnumMoveTypes _type;
+    public EnumMoveTypes _type;
 
     public void setType(EnumMoveTypes type) {
         _type = type;

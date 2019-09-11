@@ -2,7 +2,7 @@ package com.untitled.untitled.handlers;
 
 import com.untitled.untitled.GameInterface;
 import com.untitled.untitled.Input;
-import com.untitled.untitled.Log;
+import com.untitled.untitled.helpers.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;

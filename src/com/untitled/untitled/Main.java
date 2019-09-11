@@ -2,12 +2,15 @@ package com.untitled.untitled;
 
 import com.untitled.untitled.handlers.ArduinoInputHandler;
 import com.untitled.untitled.handlers.KeyboardInputHandler;
-
-import java.util.ArrayList;
+import com.untitled.untitled.helpers.Argument;
+import com.untitled.untitled.helpers.ArgumentParser;
+import com.untitled.untitled.helpers.Log;
 
 public class Main {
 
     final String LOG = "Main";
+
+    private ArgumentParser argumentParser;
 
     //Selects game handler
     static private GameInterface gameInterface;
@@ -17,21 +20,39 @@ public class Main {
     }
 
     void init(String[] args) {
+        argumentParser = new ArgumentParser();
+
         Log.info(LOG,"untitled Rock/Paper/Scissors game, version 0.0.1");
 
-        String sArgs = "";
+        String addNextAsArg = null;
         for (String arg : args) {
-            sArgs += arg + " ";
 
-            switch (arg) {
-                case "KeyboardInputHandler":
-                    gameInterface = new KeyboardInputHandler();
-                    break;
-                case "ArduinoInputHandler":
-                    gameInterface = new ArduinoInputHandler();
+            if (arg.startsWith("--")) {
+                addNextAsArg = arg.substring(2);
+                continue;
+            }
+
+            if (arg.startsWith("-")) {
+                addNextAsArg = arg.substring(1);
+            }
+
+            if (addNextAsArg != null) {
+
+                argumentParser.addArgument(new Argument(addNextAsArg, arg));
+
+                addNextAsArg = null;
             }
         }
-        Log.info(LOG, "args: " + sArgs);
+
+        argumentParser.logArgs();
+
+        switch (argumentParser.getInputHandlerArgument()) {
+            case "keyboard":
+                gameInterface = new KeyboardInputHandler();
+                break;
+            case "arduino":
+                gameInterface = new ArduinoInputHandler();
+        }
 
         Log.info(LOG, String.format("GameHandler: %s", gameInterface.getClass().getName()));
 
@@ -69,7 +90,7 @@ public class Main {
 
         GameLogic gameLogic = new GameLogic();
 
-        gameLogic.setupPlayers(8);
+        gameLogic.setupPlayers(argumentParser.getIntPlayersArgument());
 
         while (true) {
             for (Player player : gameLogic.players) {

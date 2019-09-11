@@ -3,7 +3,7 @@ package com.untitled.untitled.handlers;
 import arduino.Arduino;
 import com.untitled.untitled.GameInterface;
 import com.untitled.untitled.Input;
-import com.untitled.untitled.Log;
+import com.untitled.untitled.helpers.Log;
 
 public class ArduinoInputHandler implements GameInterface {
 

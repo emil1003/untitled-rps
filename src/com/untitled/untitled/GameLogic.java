@@ -1,5 +1,7 @@
 package com.untitled.untitled;
 
+import com.untitled.untitled.helpers.Log;
+
 import java.util.ArrayList;
 
 public class GameLogic {

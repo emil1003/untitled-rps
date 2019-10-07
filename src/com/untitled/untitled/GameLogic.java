@@ -1,10 +1,13 @@
 package com.untitled.untitled;
 
+import com.untitled.untitled.helpers.ArgumentParser;
 import com.untitled.untitled.helpers.Log;
 
 import java.util.ArrayList;
 
 public class GameLogic {
+
+    private ArgumentParser argumentParser;
 
     private boolean DEBUG = true;
     private String LOG = "GameLogic";
@@ -16,6 +19,10 @@ public class GameLogic {
         for (int i = 0; i < num; i++) {
             players.add(new Player(i));
         }
+    }
+
+    public void setArgumentParser(ArgumentParser argumentParser) {
+        this.argumentParser = argumentParser;
     }
 
     public void setMove(int player, Move move) throws NullPointerException {
@@ -47,11 +54,15 @@ public class GameLogic {
 
         for (Player player : players) {
             Log.info(LOG,String.format("Player %s has %s wins and %s losses",player.numPlayer,player.numWins,player.numLosses));
-            player.numWins = 0;
-            player.numLosses = 0;
+
+            if (argumentParser.getResetStatsArgument()) {
+                player.numWins = 0;
+                player.numLosses = 0;
+            }
         }
 
-        Log.info(LOG,"Stats reset\n");
+        if (argumentParser.getResetStatsArgument())
+            Log.info(LOG,"Stats reset\n");
     }
 
 }

@@ -16,7 +16,7 @@ public class ArgumentParser {
         arguments.add(argument);
     }
 
-    Argument getArgument(String key) throws NullPointerException {
+    public Argument getArgument(String key) throws NullPointerException {
         for (Argument argument : arguments) {
             if (argument.key.equals(key))
                 return argument;
@@ -30,6 +30,10 @@ public class ArgumentParser {
 
     public String getInputHandlerArgument() {
         return this.getArgument("input").value;
+    }
+
+    public boolean getResetStatsArgument() {
+        return Boolean.parseBoolean(this.getArgument("reset").value);
     }
 
     public void logArgs() {
